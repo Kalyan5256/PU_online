@@ -24,7 +24,6 @@ function openSuccessModal() {
 function closeSuccessModal() {
     successModal.classList.remove('active');
     document.body.style.overflow = '';
-    // Reset form
     document.getElementById('applicationForm').reset();
 }
 
@@ -33,7 +32,6 @@ closeModalBtn.addEventListener('click', closeModal);
 closeSuccessBtn.addEventListener('click', closeSuccessModal);
 closeSuccessBtn2.addEventListener('click', closeSuccessModal);
 
-// Close modal on overlay click
 applicationModal.addEventListener('click', function(e) {
     if (e.target === this) closeModal();
 });
@@ -45,57 +43,55 @@ successModal.addEventListener('click', function(e) {
 const form = document.getElementById('applicationForm');
 const submitBtn = document.getElementById('submitBtn');
 
-// === IMPORTANT: Replace this URL with your Google Apps Script Web App URL ===
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbxxuXVcyxo_ijgXeT8XXlHgXzOhR4WlRm3lnRvmiNPSfgmcGtqJPjBlRR9K7rECom4VwQ/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbx60bkHH13B89q_nthTabNCKEjSgBI-FOj_VcSF97PdebPwgzO2J3JT-rlcxZvToqyLNA/exec';
 
 form.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    // Validate required fields
     const name = document.getElementById('studentName').value.trim();
     const phone = document.getElementById('phoneNumber').value.trim();
     const course = document.getElementById('interestedCourse').value;
     const lang = document.getElementById('preferredLanguage').value;
+    const status = document.getElementById('studentStatus').value;
+    const bestTime = document.getElementById('bestTime').value;
 
-    if (!name || !phone || !course || !lang) {
+    if (!name || !phone || !course || !lang || !status || !bestTime) {
         alert('Please fill in all required fields (marked with *)');
         return;
     }
 
-    // Phone number validation (10 digits)
     if (!/^\d{10}$/.test(phone)) {
         alert('Please enter a valid 10-digit phone number');
         return;
     }
 
-    // Disable button and show loading
     submitBtn.disabled = true;
     submitBtn.innerHTML = '<span class="spinner"></span> Submitting...';
 
-    // Collect form data
     const formData = {
         studentName: name,
         phoneNumber: phone,
         interestedCourse: course,
         preferredLanguage: lang,
+        studentStatus: status,
+        bestTimeToCall: bestTime,
         message: document.getElementById('message').value.trim(),
         timestamp: new Date().toISOString()
     };
 
     try {
-        const response = await fetch(SCRIPT_URL, {
+        // ✅ Using 'no-cors' mode - this sends the data but you can't read the response
+        await fetch(SCRIPT_URL, {
             method: 'POST',
-            mode: 'no-cors', // Required for Apps Script
+            mode: 'no-cors',  // ← This prevents CORS error
             headers: {
                 'Content-Type': 'application/json',
             },
             body: JSON.stringify(formData)
         });
 
-        // Close application modal
+        // Since we can't check the response with 'no-cors', assume success
         closeModal();
-
-        // Show success modal after a short delay
         setTimeout(() => {
             openSuccessModal();
         }, 300);
