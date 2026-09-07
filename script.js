@@ -43,7 +43,7 @@ successModal.addEventListener('click', function(e) {
 const form = document.getElementById('applicationForm');
 const submitBtn = document.getElementById('submitBtn');
 
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyknHqIuKd4rF123MeuxjV8L77ISoxbCDPKZOMBMK5tuv1gw3hNpteZHnkMYJDaxGiX/exec';
+const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzM770XQRxc2QHoJTolOKDRvDhFHBlFso657QeqLo8tIqj2pjyxMP4MZDkGUz6DcBca/exec';
 
 form.addEventListener('submit', async function(e) {
     e.preventDefault();
