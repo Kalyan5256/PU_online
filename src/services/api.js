@@ -1,4 +1,4 @@
-const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbzM770XQRxc2QHoJTolOKDRvDhFHBlFso657QeqLo8tIqj2pjyxMP4MZDkGUz6DcBca/exec';
+const SCRIPT_URL = import.meta.env.VITE_SCRIPT_URL || 'https://script.google.com/macros/s/AKfycbzM770XQRxc2QHoJTolOKDRvDhFHBlFso657QeqLo8tIqj2pjyxMP4MZDkGUz6DcBca/exec';
 
 /**
  * Submit lead application data to Google Apps Script webhook

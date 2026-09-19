@@ -2,10 +2,10 @@
 //  CENTRALIZED TRACKING SERVICE (META PIXEL & GOOGLE ADS)
 // ============================================================
 
-// Replace these placeholders with your actual tracking IDs:
-export const META_PIXEL_ID = 'YOUR_META_PIXEL_ID';
-export const GOOGLE_ADS_ID = 'AW-YOUR_CONVERSION_ID';
-export const GOOGLE_CONVERSION_LABEL = 'YOUR_LABEL';
+// Read from environment variables (.env) or fallback to placeholders
+export const META_PIXEL_ID = import.meta.env.VITE_META_PIXEL_ID || 'YOUR_META_PIXEL_ID';
+export const GOOGLE_ADS_ID = import.meta.env.VITE_GOOGLE_ADS_ID || 'AW-YOUR_CONVERSION_ID';
+export const GOOGLE_CONVERSION_LABEL = import.meta.env.VITE_GOOGLE_CONVERSION_LABEL || 'YOUR_LABEL';
 
 /**
  * Initialize Meta Pixel dynamically
