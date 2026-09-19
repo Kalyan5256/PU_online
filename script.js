@@ -1,5 +1,5 @@
 // ====== MODAL CONTROLS ======
-const openModalBtn = document.getElementById('openModalBtn');
+const openModalBtns = document.querySelectorAll('#openModalBtn, #openModalBtnTop, .btn-apply-modal');
 const applicationModal = document.getElementById('applicationModal');
 const closeModalBtn = document.getElementById('closeModalBtn');
 const successModal = document.getElementById('successModal');
@@ -7,30 +7,41 @@ const closeSuccessBtn = document.getElementById('closeSuccessBtn');
 const closeSuccessBtn2 = document.getElementById('closeSuccessBtn2');
 
 function openModal() {
-    applicationModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    if (applicationModal) {
+        applicationModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function closeModal() {
-    applicationModal.classList.remove('active');
-    document.body.style.overflow = '';
+    if (applicationModal) {
+        applicationModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
 }
 
 function openSuccessModal() {
-    successModal.classList.add('active');
-    document.body.style.overflow = 'hidden';
+    if (successModal) {
+        successModal.classList.add('active');
+        document.body.style.overflow = 'hidden';
+    }
 }
 
 function closeSuccessModal() {
-    successModal.classList.remove('active');
-    document.body.style.overflow = '';
-    document.getElementById('applicationForm').reset();
+    if (successModal) {
+        successModal.classList.remove('active');
+        document.body.style.overflow = '';
+    }
+    const appForm = document.getElementById('applicationForm');
+    if (appForm) appForm.reset();
 }
 
-openModalBtn.addEventListener('click', openModal);
-closeModalBtn.addEventListener('click', closeModal);
-closeSuccessBtn.addEventListener('click', closeSuccessModal);
-closeSuccessBtn2.addEventListener('click', closeSuccessModal);
+openModalBtns.forEach(btn => {
+    btn.addEventListener('click', openModal);
+});
+if (closeModalBtn) closeModalBtn.addEventListener('click', closeModal);
+if (closeSuccessBtn) closeSuccessBtn.addEventListener('click', closeSuccessModal);
+if (closeSuccessBtn2) closeSuccessBtn2.addEventListener('click', closeSuccessModal);
 
 applicationModal.addEventListener('click', function(e) {
     if (e.target === this) closeModal();
