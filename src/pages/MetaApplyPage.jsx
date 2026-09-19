@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import SEO from '../components/SEO';
 import LandingHeader from '../components/LandingHeader';
 import ApplicationForm from '../components/ApplicationForm';
 import FeaturesGrid from '../components/FeaturesGrid';
@@ -9,6 +10,7 @@ import { initMetaPixel, trackMetaLead } from '../services/tracking';
 
 export default function MetaApplyPage() {
     const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+    const [submittedLanguage, setSubmittedLanguage] = useState('');
     const formRef = useRef(null);
 
     useEffect(() => {
@@ -26,6 +28,13 @@ export default function MetaApplyPage() {
 
     return (
         <div className="landing-container">
+            <SEO 
+                title="Apply Now | Parul University Online Degrees 2026-27 | Meta Campaign"
+                description="Apply for NAAC A++ accredited Parul University Online Degrees. UGC entitled BBA, BCA, MBA, MCA and Diploma courses with zero-cost EMI starting at ₹68/day."
+                keywords="Parul University online degree, NAAC A++ university, online MBA course, online MCA course, flexible degree India, Parul University admissions"
+                canonical="https://pu-online.vercel.app/meta-apply"
+            />
+
             <LandingHeader onApplyClick={scrollToForm} />
 
             <main className="landing-main">
@@ -83,7 +92,10 @@ export default function MetaApplyPage() {
                             <ApplicationForm 
                                 source="Meta Ads Campaign"
                                 isInline={true}
-                                onSuccess={() => setIsSuccessOpen(true)}
+                                onSuccess={(data) => {
+                                    setSubmittedLanguage(data?.language || '');
+                                    setIsSuccessOpen(true);
+                                }}
                                 onConversion={(course, status) => trackMetaLead(course, status)}
                             />
                         </div>
@@ -108,6 +120,7 @@ export default function MetaApplyPage() {
             <SuccessModal 
                 isOpen={isSuccessOpen} 
                 onClose={() => setIsSuccessOpen(false)} 
+                preferredLanguage={submittedLanguage}
             />
         </div>
     );

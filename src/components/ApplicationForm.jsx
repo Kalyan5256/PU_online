@@ -52,6 +52,13 @@ export default function ApplicationForm({
                 onConversion(course, status);
             }
 
+            const submittedData = {
+                language,
+                course,
+                phone,
+                name
+            };
+
             // Reset form
             setName('');
             setPhone('');
@@ -62,7 +69,7 @@ export default function ApplicationForm({
             setMessage('');
 
             if (onSuccess) {
-                onSuccess();
+                onSuccess(submittedData);
             }
         } catch (err) {
             console.error('Submission failed:', err);

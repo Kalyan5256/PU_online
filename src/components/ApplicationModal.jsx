@@ -24,9 +24,9 @@ export default function ApplicationModal({ isOpen, onClose, onSuccess, source = 
 
                 <ApplicationForm 
                     source={source} 
-                    onSuccess={() => {
+                    onSuccess={(data) => {
                         onClose();
-                        if (onSuccess) onSuccess();
+                        if (onSuccess) onSuccess(data);
                     }}
                     isInline={false}
                 />

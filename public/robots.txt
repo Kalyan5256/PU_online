@@ -1,0 +1,6 @@
+# Robots.txt for Parul University Online
+User-agent: *
+Allow: /
+
+# Sitemap
+Sitemap: https://pu-online.vercel.app/sitemap.xml

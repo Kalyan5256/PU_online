@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
+import SEO from '../components/SEO';
 import LandingHeader from '../components/LandingHeader';
 import ApplicationForm from '../components/ApplicationForm';
 import FeaturesGrid from '../components/FeaturesGrid';
@@ -9,6 +10,7 @@ import { initGoogleTag, trackGoogleConversion } from '../services/tracking';
 
 export default function GoogleApplyPage() {
     const [isSuccessOpen, setIsSuccessOpen] = useState(false);
+    const [submittedLanguage, setSubmittedLanguage] = useState('');
     const formRef = useRef(null);
 
     useEffect(() => {
@@ -26,6 +28,13 @@ export default function GoogleApplyPage() {
 
     return (
         <div className="landing-container">
+            <SEO 
+                title="Apply Online | Parul University Online Degree Admissions 2026-27"
+                description="Official Google Admissions portal for Parul University Online Degrees. UGC entitled, NAAC A++ accredited. Flexible learning with zero-cost EMI starting at ₹68/day."
+                keywords="Parul University online degree, apply online degree, online MBA admission, online MCA admission, online BBA fees, distance learning India 2026"
+                canonical="https://pu-online.vercel.app/google-apply"
+            />
+
             <LandingHeader onApplyClick={scrollToForm} />
 
             <main className="landing-main">
@@ -83,7 +92,10 @@ export default function GoogleApplyPage() {
                             <ApplicationForm 
                                 source="Google Ads Campaign"
                                 isInline={true}
-                                onSuccess={() => setIsSuccessOpen(true)}
+                                onSuccess={(data) => {
+                                    setSubmittedLanguage(data?.language || '');
+                                    setIsSuccessOpen(true);
+                                }}
                                 onConversion={() => trackGoogleConversion()}
                             />
                         </div>
@@ -108,6 +120,7 @@ export default function GoogleApplyPage() {
             <SuccessModal 
                 isOpen={isSuccessOpen} 
                 onClose={() => setIsSuccessOpen(false)} 
+                preferredLanguage={submittedLanguage}
             />
         </div>
     );
