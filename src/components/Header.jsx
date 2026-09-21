@@ -10,13 +10,14 @@ export default function Header({ onOpenModal }) {
                 <span className="badge">NAAC A++ ACCREDITED</span>
                 <span className="badge">UGC-ENTITLED</span>
             </div>
-            <p className="main-title">Parul University Online</p>
+            <h1 className="main-title">Parul University Online</h1>
             <p className="sub-title">UGC Entitled Degree · Industry Centric · Flexible Learning</p>
             <div className="header-cta">
                 <button className="btn-apply btn-apply-top" onClick={onOpenModal}>
-                    Apply Now
+                    ⚡ Apply Now
                 </button>
             </div>
         </header>
     );
 }
+
